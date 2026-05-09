@@ -72,8 +72,79 @@ body{
 user-select: none;}
 </style>
 </head>
+<script>
+const chars = "@HIJ_LM%OPQR^WX#YZa#b+";
+
+const el = document.querySelector("p");
+
+const finalText = "Loading";
+
+let frame = 0;
+
+const interval = setInterval(() => {
+
+    let output = "";
+
+    for (let i = 0; i < finalText.length; i++) {
+
+        if (i < frame) {
+            output += finalText[i];
+        } else {
+            output += chars[Math.floor(Math.random() * chars.length)];
+        }
+    }
+
+    el.textContent = "_" + output + "_";
+
+    frame += 0.4;
+
+    if (frame >= finalText.length) {
+
+        clearInterval(interval);
+
+        el.textContent = "_Loading_";
+
+        // loop lại animation
+        setTimeout(startAgain, 500);
+    }
+
+}, 50);
+
+function startAgain() {
+
+    frame = 0;
+
+    const loop = setInterval(() => {
+
+        let output = "";
+
+        for (let i = 0; i < finalText.length; i++) {
+
+            if (i < frame) {
+                output += finalText[i];
+            } else {
+                output += chars[Math.floor(Math.random() * chars.length)];
+            }
+        }
+
+        el.textContent = "_" + output + "_";
+
+        frame += 0.4;
+
+        if (frame >= finalText.length) {
+
+            clearInterval(loop);
+
+            el.textContent = "_Loading_";
+
+            setTimeout(startAgain, 500);
+        }
+
+    }, 50);
+}
+</script>
 <body>
-  <script>
+<script>
     setTimeout(function() {
       window.location.href = "home.html";
     }, 5000);
@@ -128,7 +199,6 @@ user-select: none;}
 		<div class="hexagon__sector"></div>
 	</div>
 </div>
-<p aria-label="Loading">Loading</p>
-</body>
+<p aria-label="Loading"></p></body>
 </html>
 </script>
