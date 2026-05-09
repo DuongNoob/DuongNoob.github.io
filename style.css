@@ -5,8 +5,8 @@
 	padding: 0;
 }
 :root {
-	--bg: #e3e4e8;
-	--fg: #17181c;
+	--bg: #050608;
+	--fg: #86bada;
 	--dur: 8s;
 	font-size: calc(20px + (30 - 20) * (100vw - 320px) / (1280 - 320));
 }
