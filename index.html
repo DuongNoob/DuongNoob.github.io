@@ -23,44 +23,93 @@ shortcut.add("Ctrl+Shift+C",function(){top.location.href="https://www.facebook.c
 shortcut.add("Ctrl+Shift+I",function(){top.location.href="https://www.facebook.com/trungbao1607"});
 //]]></script>
 <script language="JavaScript">
-    window.onload = function() {
-        document.addEventListener("contextmenu", function(e) {
-            e.preventDefault();
-        }, false);
-        document.addEventListener("keydown", function(e) {
-            //document.onkeydown = function(e) {
-            // "I" key
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-                disabledEvent(e);
-            }
-            // "J" key
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-                disabledEvent(e);
-            }
-            // "S" key + macOS
-            if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-                disabledEvent(e);
-            }
-            // "U" key
-            if (e.ctrlKey && e.keyCode == 85) {
-                disabledEvent(e);
-            }
-            // "F12" key
-            if (event.keyCode == 123) {
-                disabledEvent(e);
-            }
-        }, false);
- 
-        function disabledEvent(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            } else if (window.event) {
-                window.event.cancelBubble = true;
-            }
-            e.preventDefault();
-            return false;
+    <script>
+window.onload = function () {
+
+    document.addEventListener("contextmenu", function(e) {
+        e.preventDefault();
+    }, false);
+
+    document.addEventListener("keydown", function(e) {
+
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+            disabledEvent(e);
         }
-    };
+
+        if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+            disabledEvent(e);
+        }
+
+        if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+            disabledEvent(e);
+        }
+
+        if (e.ctrlKey && e.keyCode == 85) {
+            disabledEvent(e);
+        }
+
+        if (e.keyCode == 123) {
+            disabledEvent(e);
+        }
+
+    }, false);
+
+    function disabledEvent(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        } else if (window.event) {
+            window.event.cancelBubble = true;
+        }
+
+        e.preventDefault();
+        return false;
+    }
+
+    // SCRAMBLE TEXT
+
+    const chars = "@HIJ_LM%OPQR^WX#YZa#b+";
+
+    const el = document.querySelector("p");
+
+    const finalText = "Loading";
+
+    let frame = 0;
+
+    function startAgain() {
+
+        frame = 0;
+
+        const loop = setInterval(() => {
+
+            let output = "";
+
+            for (let i = 0; i < finalText.length; i++) {
+
+                if (i < frame) {
+                    output += finalText[i];
+                } else {
+                    output += chars[Math.floor(Math.random() * chars.length)];
+                }
+            }
+
+            el.textContent = "_" + output + "_";
+
+            frame += 0.4;
+
+            if (frame >= finalText.length) {
+
+                clearInterval(loop);
+
+                el.textContent = "_Loading_";
+
+                setTimeout(startAgain, 500);
+            }
+
+        }, 50);
+    }
+
+    startAgain();
+};
 </script>
 <style type='text/css'>
 body{
@@ -72,79 +121,8 @@ body{
 user-select: none;}
 </style>
 </head>
-<script>
-const chars = "@HIJ_LM%OPQR^WX#YZa#b+";
-
-const el = document.querySelector("p");
-
-const finalText = "Loading";
-
-let frame = 0;
-
-const interval = setInterval(() => {
-
-    let output = "";
-
-    for (let i = 0; i < finalText.length; i++) {
-
-        if (i < frame) {
-            output += finalText[i];
-        } else {
-            output += chars[Math.floor(Math.random() * chars.length)];
-        }
-    }
-
-    el.textContent = "_" + output + "_";
-
-    frame += 0.4;
-
-    if (frame >= finalText.length) {
-
-        clearInterval(interval);
-
-        el.textContent = "_Loading_";
-
-        // loop lại animation
-        setTimeout(startAgain, 500);
-    }
-
-}, 50);
-
-function startAgain() {
-
-    frame = 0;
-
-    const loop = setInterval(() => {
-
-        let output = "";
-
-        for (let i = 0; i < finalText.length; i++) {
-
-            if (i < frame) {
-                output += finalText[i];
-            } else {
-                output += chars[Math.floor(Math.random() * chars.length)];
-            }
-        }
-
-        el.textContent = "_" + output + "_";
-
-        frame += 0.4;
-
-        if (frame >= finalText.length) {
-
-            clearInterval(loop);
-
-            el.textContent = "_Loading_";
-
-            setTimeout(startAgain, 500);
-        }
-
-    }, 50);
-}
-</script>
 <body>
-<script>
+  <script>
     setTimeout(function() {
       window.location.href = "home.html";
     }, 5000);
@@ -199,6 +177,7 @@ function startAgain() {
 		<div class="hexagon__sector"></div>
 	</div>
 </div>
-<p aria-label="Loading"></p></body>
+<p aria-label="Loading"></p>
+</body>
 </html>
 </script>
