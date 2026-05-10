@@ -131,6 +131,8 @@ user-select: none;}
 </div>
 <p aria-label="Loading"></p>
 
+<audio id="scrambleSound" src="scramble.mp3"></audio>
+
 <script>
 const chars = "@HIJ_LM%OPQR^WX#YZa#b+";
 
@@ -138,11 +140,16 @@ const el = document.querySelector("p");
 
 const finalText = "Loading";
 
+const sound = document.getElementById("scrambleSound");
+
 let frame = 0;
 
 function startAgain() {
 
     frame = 0;
+
+    sound.currentTime = 0;
+    sound.play();
 
     const loop = setInterval(() => {
 
@@ -164,6 +171,8 @@ function startAgain() {
         if (frame >= finalText.length) {
 
             clearInterval(loop);
+
+            sound.pause();
 
             el.textContent = "_Loading_";
 
