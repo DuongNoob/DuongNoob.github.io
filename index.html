@@ -74,11 +74,7 @@ user-select: none;}
 </style>
 </head>
 <body>
-  <script>
-    setTimeout(function() {
-      window.location.href = "home.html";
-    }, 5000);
-  </script>
+	<div id="clickToStart"></div>
 <div class="hexagon" aria-label="Animated hexagonal ripples">
 	<div class="hexagon__group">
 		<div class="hexagon__sector"></div>
@@ -141,12 +137,10 @@ user-select: none;}
 
 <script>
 const chars = "@HIJ_LM%OPQR^WX#YZa#b+";
-
 const el = document.querySelector("p");
-
 const finalText = "Loading";
-
 const sound = document.getElementById("scrambleSound");
+const overlay = document.getElementById("clickToStart");
 
 let frame = 0;
 
@@ -155,6 +149,7 @@ function startAgain() {
     frame = 0;
 
     sound.currentTime = 0;
+    sound.muted = false;
     sound.play();
 
     const loop = setInterval(() => {
@@ -186,9 +181,19 @@ function startAgain() {
         }
 
     }, 50);
+
+    setTimeout(() => {
+        window.location.href = "home.html";
+    }, 5000);
 }
 
-startAgain();
+overlay.addEventListener("click", () => {
+
+    overlay.style.display = "none";
+
+    startAgain();
+
+});
 </script>
 </body>
 </html>
